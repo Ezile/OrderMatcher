@@ -5,7 +5,7 @@ import java.io.File;
 /**
  * OrderMatcher - Locale
  * Handles localization of the program.
- * (loading of locale data out of scope for project)
+ * (Loading of locale data from file is out of scope for this project)
  *
  * Author: Elise Edette
  * Date: 2016-06-16
@@ -26,6 +26,8 @@ public class Locale {
     static final String ERROR_COMMAND_UNKNOWN = "Unknown command.";
     static final String BUY = "BUY";
     static final String SELL = "SELL";
+    static final String BOOK = "Book";
+    static final String ORDER = "Order";
     static final String NO_ORDERS = " < no records > ";
     static final String ORDER_SUCCESS = "Order placed successfully.";
 

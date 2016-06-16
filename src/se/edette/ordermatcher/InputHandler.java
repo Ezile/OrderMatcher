@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 /**
  * OrderMatcher - InputHandler
+ * Takes input from the user and parses it into usable data.
  *
  * Author: Elise Edette
  * Date: 2016-06-16
@@ -24,6 +25,9 @@ public class InputHandler {
     }
 
     public void doNormalizeCase(boolean bNormalize) {
+        /**
+         * Normalize the case of the input (command) to lower case.
+         * */
         normalizeCase = bNormalize;
     }
 

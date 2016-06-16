@@ -9,12 +9,13 @@ import java.util.Date;
  * Date: 2016-06-16
  */
 public class Order implements Comparable<Order>{
-    private static int id = 0;      // unique order id.
-    private int price, volume;
+    private static int idc = 0;      // instance counter used for the id.
+    private int price, volume, id;
     private long timeCreated;
 
     public Order(int price, int volume) {
-        id++;
+        idc++;
+        id = idc;
         timeCreated = System.currentTimeMillis();
         this.price = price;
         this.volume = volume;
@@ -38,11 +39,11 @@ public class Order implements Comparable<Order>{
 
     @Override
     public String toString() {
-        String head = "Order";
+        String head = Locale.ORDER;
         String tail = ".";
         String date = getDate().toString();
 
-        return head + " (" + getId() + "): Price: " + getPrice() + ", Volume: " + getVolume() + " @ " + date + tail;
+        return head + " (id:" + getId() + "): Price: " + getPrice() + ", Volume: " + getVolume() + " [total: " + getPrice() * getVolume() + "]" + " @ " + date + tail;
     }
 
     @Override

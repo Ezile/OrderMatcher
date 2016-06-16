@@ -1,5 +1,6 @@
 package se.edette.ordermatcher;
 
+import java.util.Collections;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -15,7 +16,7 @@ public class OrderBook {
 
     public OrderBook() {
         sellOrders = new TreeSet<>();
-        buyOrders = new TreeSet<>();
+        buyOrders = new TreeSet<>(Collections.reverseOrder());
     }
 
     public boolean addBuyOrder(int price, int volume) {
@@ -37,6 +38,11 @@ public class OrderBook {
     }
 
     public String status() {
+        /**
+         * Returns the status (i.e. list of sell/buy orders).
+         * Used with the PRINT command.
+         * */
+
         String retval = "--- " + Locale.SELL + " ---\n";
 
         if (sellOrders.size() > 0) {
@@ -52,6 +58,33 @@ public class OrderBook {
         if (buyOrders.size() > 0) {
             for (Order order : buyOrders) {
                 retval += Locale.BUY + " " + order.getVolume() + "@" + order.getPrice() + "\n";
+            }
+        } else {
+            retval += Locale.NO_ORDERS + "\n";
+        }
+
+        return retval;
+    }
+
+    @Override
+    public String toString() {
+        String retval = "";
+
+        retval += Locale.BOOK + " " + Locale.SELL + " " + Locale.ORDER + " (" + sellOrders.size() + "):\n";
+
+        if (sellOrders.size() > 0) {
+            for (Order order : sellOrders) {
+                retval += " " + order.toString() + "\n";
+            }
+        } else {
+            retval += Locale.NO_ORDERS + "\n";
+        }
+
+        retval += Locale.BOOK + " " + Locale.BUY + " " + Locale.ORDER + " (" + buyOrders.size() + "):\n";
+
+        if (buyOrders.size() > 0) {
+            for (Order order : buyOrders) {
+                retval += " " + order.toString() + "\n";
             }
         } else {
             retval += Locale.NO_ORDERS + "\n";

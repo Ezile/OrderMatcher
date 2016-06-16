@@ -48,6 +48,9 @@ public class Main {
                 case Locale.COMMAND.PRINT:
                     say(book1.status());
                     break;
+                case "debug":
+                    say(book1.toString());
+                    break;
                 default:
                     say(Locale.ERROR_COMMAND_UNKNOWN);
             }
