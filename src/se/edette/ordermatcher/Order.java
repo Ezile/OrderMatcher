@@ -36,7 +36,6 @@ public class Order implements Comparable<Order>{
     public long getTimeEpochMS() {
         /**
          * Return the creation time (since epoch) of this Order in milliseconds.
-         *
         * */
 
         return timeCreated;
@@ -50,7 +49,6 @@ public class Order implements Comparable<Order>{
         /**
          * Deducts the specified amount from the volume of this order.
          * Returns the remaining volume after the trade.
-         *
          * */
 
         if (volumeToTrade > volume)

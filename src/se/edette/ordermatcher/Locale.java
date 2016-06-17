@@ -11,14 +11,14 @@ package se.edette.ordermatcher;
 public class Locale {
     private Locale() {}
 
-    static final String WELCOME = " ### Order Matcher v1.0 ###\n     Order book created. Ready for use.\n     For help type 'help'\n\n";
+    static final String WELCOME = " ### Order Matcher v1.0 ###\n     Order book created. Ready for use.\n     For help type 'help'\n";
     static final String GOODBYE = "Thank you for using Order Matcher!";
     static final String HELP = "Available commands:\n" +
             "BUY [volume]@[price]: Creates a buy order with the specified volume at the specified price.\n" +
             "SELL [volume]@[price]: Creates a sell order with the specified volume at the specified price.\n" +
             "PRINT: displays all pending orders.\n" +
             "HELP: displays this help message.\n" +
-            "QUIT: quits Order matcher\n";
+            "QUIT: quits Order Matcher\n";
     static final String ERROR_ARGUMENT_VOLUME = "The volume of the order must be positive.";
     static final String ERROR_ARGUMENT_PRICE = "The price of the order must be positive.";
     static final String ERROR_VOLUME_EXCEEDS = "Cannot proceed with the trade; The amount to trade cannot exceed the volume of the order.";

@@ -41,9 +41,8 @@ public class OrderBook {
 
     public String status() {
         /**
-         * Returns the status (i.e. list of sell/buy orders).
+         * Returns the status (that is the list of sell/buy orders).
          * Used with the PRINT command.
-         *
          * */
 
         String retval = "--- " + Locale.SELL + " ---\n";
@@ -73,7 +72,6 @@ public class OrderBook {
         /**
          * Executes trades if there are matching buy and sell orders.
          * Returns a string of trades if any, else null.
-         *
          * */
 
         int tradeCount = 0;
