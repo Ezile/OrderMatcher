@@ -1,7 +1,5 @@
 package se.edette.ordermatcher;
 
-import java.util.Scanner;
-
 /**
  * OrderMatcher
  *

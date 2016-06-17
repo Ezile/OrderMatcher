@@ -49,7 +49,7 @@ public class InputHandler {
          * */
 
         // Get the command part of the input.
-        String[] bits = rawCommand.split(" ", 2);
+        String[] bits = rawCommand.split("\\s+", 2);
         command = bits[0];
 
         // Try to extract the arguments

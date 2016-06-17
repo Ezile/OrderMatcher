@@ -1,7 +1,5 @@
 package se.edette.ordermatcher;
 
-import java.io.File;
-
 /**
  * OrderMatcher - Locale
  * Handles localization of the program.
