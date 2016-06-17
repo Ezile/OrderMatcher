@@ -6,7 +6,7 @@ import java.util.Date;
  * OrderMatcher - Order
  *
  * Author: Elise Edette
- * Date: 2016-06-16
+ * Date: 2016-06-17
  */
 public class Order implements Comparable<Order>{
     private static int idc = 0;      // instance counter used for the id.
@@ -37,13 +37,28 @@ public class Order implements Comparable<Order>{
         return new Date(timeCreated);
     }
 
+    public int trade(int volumeToTrade) {
+        /**
+         * Deducts the specified amount from the volume of this order.
+         * Returns the remaining volume after the trade.
+         *
+         * */
+
+        if (volumeToTrade > volume)
+            throw new IllegalArgumentException(Locale.ERROR_VOLUME_EXCEEDS);
+
+        volume -= volumeToTrade;
+
+        return volume;
+    }
+
     @Override
     public String toString() {
         String head = Locale.ORDER;
         String tail = ".";
         String date = getDate().toString();
 
-        return head + " (id:" + getId() + "): Price: " + getPrice() + ", Volume: " + getVolume() + " [total: " + getPrice() * getVolume() + "]" + " @ " + date + tail;
+        return head + " (id:" + getId() + "): Volume: " + getVolume() + ", Price: " + getPrice() + " [total: " + getPrice() * getVolume() + "]" + " @ " + date + tail;
     }
 
     @Override

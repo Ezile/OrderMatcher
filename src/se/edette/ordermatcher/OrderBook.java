@@ -1,6 +1,7 @@
 package se.edette.ordermatcher;
 
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -8,7 +9,7 @@ import java.util.TreeSet;
  * OrderMatcher - OrderBook
  *
  * Author: Elise Edette
- * Date: 2016-06-16
+ * Date: 2016-06-17
  */
 public class OrderBook {
     private Set<Order> sellOrders;
@@ -41,6 +42,7 @@ public class OrderBook {
         /**
          * Returns the status (i.e. list of sell/buy orders).
          * Used with the PRINT command.
+         *
          * */
 
         String retval = "--- " + Locale.SELL + " ---\n";
@@ -64,6 +66,72 @@ public class OrderBook {
         }
 
         return retval;
+    }
+
+    public String trade() {
+        /**
+         * Executes trades if there are matching buy and sell orders.
+         * Returns a string of trades if any, else null.
+         *
+         * */
+
+        int tradeCount = 0;
+        boolean endOfTrades = false;
+        String tradeOutput = "";
+
+        if (buyOrders.size() > 0 && sellOrders.size() > 0) {
+            Iterator<Order> sellIterator = sellOrders.iterator();
+            while (sellIterator.hasNext() && !endOfTrades) {
+                Order sellOrder = sellIterator.next();
+
+                Iterator<Order> buyIterator = buyOrders.iterator();
+                while (buyIterator.hasNext() && !endOfTrades) {
+                    Order buyOrder = buyIterator.next();
+
+                    if (sellOrder.getPrice() <= buyOrder.getPrice()) {
+                        int tradePrice, tradeVolume;
+
+                        if (sellOrder.getVolume() == buyOrder.getVolume()) {
+                            tradePrice = sellOrder.getPrice();
+                            tradeVolume = sellOrder.getVolume();
+                        } else if (sellOrder.getVolume() > buyOrder.getVolume()) {
+                            tradePrice = sellOrder.getPrice();
+                            tradeVolume = buyOrder.getVolume();
+                        } else {
+                            tradePrice = sellOrder.getPrice();
+                            tradeVolume = sellOrder.getVolume();
+                        }
+
+                        // Trade the orders
+                        sellOrder.trade(tradeVolume);
+                        buyOrder.trade(tradeVolume);
+
+                        // Check if orders have been exhausted and remove those.
+                        if (sellOrder.getVolume() == 0) {
+                            sellIterator.remove();
+                            // The outer loop (sellOrders) must be iterated forward at this point
+                            // as the inner loop might have more items to match
+                            if (sellIterator.hasNext()) {
+                                sellOrder = sellIterator.next();
+                            } else {
+                                endOfTrades = true;
+                            }
+                        }
+                        if (buyOrder.getVolume() == 0) buyIterator.remove();
+
+                        tradeCount++;
+                        tradeOutput += Locale.TRADE + " " + tradeVolume + "@" + tradePrice + "\n";
+                    } else {
+                        endOfTrades = true;
+                    }
+                }
+            }
+        }
+
+        if (tradeCount > 0)
+            return tradeOutput;
+        else
+            return null;
     }
 
     @Override

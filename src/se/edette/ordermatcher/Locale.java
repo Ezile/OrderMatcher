@@ -8,7 +8,7 @@ import java.io.File;
  * (Loading of locale data from file is out of scope for this project)
  *
  * Author: Elise Edette
- * Date: 2016-06-16
+ * Date: 2016-06-17
  */
 public class Locale {
     private Locale() {}
@@ -23,9 +23,11 @@ public class Locale {
             "QUIT: quits Order matcher\n";
     static final String ERROR_ARGUMENT_VOLUME = "The volume of the order must be positive.";
     static final String ERROR_ARGUMENT_PRICE = "The price of the order must be positive.";
+    static final String ERROR_VOLUME_EXCEEDS = "Cannot proceed with the trade; The amount to trade cannot exceed the volume of the order.";
     static final String ERROR_COMMAND_UNKNOWN = "Unknown command.";
     static final String BUY = "BUY";
     static final String SELL = "SELL";
+    static final String TRADE = "TRADE";
     static final String BOOK = "Book";
     static final String ORDER = "Order";
     static final String NO_ORDERS = " < no records > ";

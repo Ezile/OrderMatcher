@@ -6,7 +6,7 @@ import java.util.Scanner;
  * OrderMatcher
  *
  * Author: Elise Edette
- * Date: 2016-06-16
+ * Date: 2016-06-17
  */
 public class Main {
 
@@ -31,16 +31,32 @@ public class Main {
                     break;
                 case Locale.COMMAND.BUY:
                     try {
+                        // Add the buy order.
                         book1.addBuyOrder(input.getPrice(), input.getVolume());
+
+                        // Report success.
                         say(Locale.ORDER_SUCCESS);
+
+                        // Execute trading and display results if any.
+                        String tradingResult = book1.trade();
+                        if (tradingResult != null)
+                            say(tradingResult);
                     } catch (IllegalArgumentException e) {
                         say(e.getMessage());
                     }
                     break;
                 case Locale.COMMAND.SELL:
                     try {
+                        // Add the sell order to the book.
                         book1.addSellOrder(input.getPrice(), input.getVolume());
+
+                        // Report success.
                         say(Locale.ORDER_SUCCESS);
+
+                        // Execute trading and display results if any.
+                        String tradingResult = book1.trade();
+                        if (tradingResult != null)
+                            say(tradingResult);
                     } catch (IllegalArgumentException e) {
                         say(e.getMessage());
                     }
