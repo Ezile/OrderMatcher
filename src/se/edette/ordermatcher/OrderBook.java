@@ -112,7 +112,8 @@ public class OrderBook {
                             // The outer loop (sellOrders) must be iterated forward at this point
                             // as the inner loop might have more items to match
                             if (sellIterator.hasNext()) {
-                                sellOrder = sellIterator.next();
+                                if (buyIterator.hasNext())
+                                    sellOrder = sellIterator.next();
                             } else {
                                 endOfTrades = true;
                             }
