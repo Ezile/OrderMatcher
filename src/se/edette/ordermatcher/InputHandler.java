@@ -20,6 +20,7 @@ public class InputHandler {
     }
 
     public void poll() {
+        System.out.print("> ");
         rawCommand = userInput.nextLine();
         parse();
     }

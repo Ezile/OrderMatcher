@@ -120,7 +120,7 @@ public class OrderBook {
                         if (buyOrder.getVolume() == 0) buyIterator.remove();
 
                         tradeCount++;
-                        tradeOutput += Locale.TRADE + " " + tradeVolume + "@" + tradePrice + "\n";
+                        tradeOutput += (tradeOutput.equals("") ? "" : "\n") + Locale.TRADE + " " + tradeVolume + "@" + tradePrice;
                     } else {
                         endOfTrades = true;
                     }

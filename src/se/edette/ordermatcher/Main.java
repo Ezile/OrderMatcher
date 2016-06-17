@@ -33,7 +33,7 @@ public class Main {
                         book1.addBuyOrder(input.getPrice(), input.getVolume());
 
                         // Report success.
-                        say(Locale.ORDER_SUCCESS);
+                        //say(Locale.ORDER_SUCCESS);    // Commented away to conform to spec.
 
                         // Execute trading and display results if any.
                         String tradingResult = book1.trade();
@@ -49,7 +49,7 @@ public class Main {
                         book1.addSellOrder(input.getPrice(), input.getVolume());
 
                         // Report success.
-                        say(Locale.ORDER_SUCCESS);
+                        //say(Locale.ORDER_SUCCESS);    // Commented away to conform to spec.
 
                         // Execute trading and display results if any.
                         String tradingResult = book1.trade();
