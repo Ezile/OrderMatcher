@@ -22,8 +22,8 @@ public class OrderBook {
     }
 
     public boolean addBuyOrder(int price, int volume) {
-        if (price <= 0) throw new IllegalArgumentException(Locale.ERROR_ARGUMENT_PRICE);
         if (volume <= 0) throw new IllegalArgumentException(Locale.ERROR_ARGUMENT_VOLUME);
+        if (price <= 0) throw new IllegalArgumentException(Locale.ERROR_ARGUMENT_PRICE);
 
         buyOrders.add(new Order(price, volume));
 
@@ -31,8 +31,8 @@ public class OrderBook {
     }
 
     public boolean addSellOrder(int price, int volume) {
-        if (price <= 0) throw new IllegalArgumentException(Locale.ERROR_ARGUMENT_PRICE);
         if (volume <= 0) throw new IllegalArgumentException(Locale.ERROR_ARGUMENT_VOLUME);
+        if (price <= 0) throw new IllegalArgumentException(Locale.ERROR_ARGUMENT_PRICE);
 
         sellOrders.add(new Order(price, volume));
 
@@ -90,15 +90,18 @@ public class OrderBook {
                     if (sellOrder.getPrice() <= buyOrder.getPrice()) {
                         int tradePrice, tradeVolume;
 
-                        if (sellOrder.getVolume() == buyOrder.getVolume()) {
-                            tradePrice = sellOrder.getPrice();
-                            tradeVolume = sellOrder.getVolume();
-                        } else if (sellOrder.getVolume() > buyOrder.getVolume()) {
-                            tradePrice = sellOrder.getPrice();
+                        // Determine the volume to use (lowest volume of the two Orders)
+                        if (sellOrder.getVolume() > buyOrder.getVolume()) {
                             tradeVolume = buyOrder.getVolume();
                         } else {
-                            tradePrice = sellOrder.getPrice();
                             tradeVolume = sellOrder.getVolume();
+                        }
+
+                        // Determine the price to use (oldest Order of the two)
+                        if (sellOrder.getTimeEpochMS() > buyOrder.getTimeEpochMS()) {
+                            tradePrice = buyOrder.getPrice();
+                        } else {
+                            tradePrice = sellOrder.getPrice();
                         }
 
                         // Trade the orders
