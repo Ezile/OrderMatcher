@@ -33,6 +33,15 @@ public class Order implements Comparable<Order>{
         return volume;
     }
 
+    public long getTimeEpochMS() {
+        /**
+         * Return the creation time (since epoch) of this Order in milliseconds.
+         *
+        * */
+
+        return timeCreated;
+    }
+
     public Date getDate() {
         return new Date(timeCreated);
     }
@@ -63,7 +72,7 @@ public class Order implements Comparable<Order>{
 
     @Override
     public int compareTo(Order other) {
-        // Order by price, date.
+        // Order by price ASC, date ASC.
         if (Integer.compare(price, other.price) != 0) {
             return Integer.compare(price, other.price);
         } else {

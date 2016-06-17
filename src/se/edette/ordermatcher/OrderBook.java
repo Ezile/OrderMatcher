@@ -1,6 +1,5 @@
 package se.edette.ordermatcher;
 
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
@@ -17,7 +16,9 @@ public class OrderBook {
 
     public OrderBook() {
         sellOrders = new TreeSet<>();
-        buyOrders = new TreeSet<>(Collections.reverseOrder());
+        // The natural ordering of an Order is: price ASC, date ASC
+        // Let's override it for buyOrders as: price DESC, date ASC with a comparator
+        buyOrders = new TreeSet<>((a, b) -> Integer.compare(b.getPrice(), a.getPrice()) != 0 ? Integer.compare(b.getPrice(), a.getPrice()) : Long.compare(a.getTimeEpochMS(), b.getTimeEpochMS()));
     }
 
     public boolean addBuyOrder(int price, int volume) {
